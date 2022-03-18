@@ -14,6 +14,7 @@ repositories {
 dependencies {
 	implementation(kotlin("stdlib"))
 	testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+	testImplementation("com.approvaltests:approvaltests:14.0.0")
 }
 
 tasks.test {
