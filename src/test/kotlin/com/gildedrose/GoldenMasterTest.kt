@@ -46,6 +46,10 @@ class GoldenMasterTest {
             "Backstage passes to a TAFKAL80ETC concert",
             "Conjured Mana Cake"
         )
+        
+        private val randomSellin = Random(123456)
+        private val randomQuality = Random(654321)
+        private val randomItem = Random(654321)
 
         fun stringRep(items: Array<Item>): String {
             return items.joinToString("\n") { it.toString() }
@@ -53,20 +57,20 @@ class GoldenMasterTest {
 
         fun randomItem(): Item = Item(randomItemName(), randomSellin(), randomQuality())
 
-        val randomSellin = Random(123456)
         private fun randomSellin(): Int {
             return randomSellin.nextInt(10 + 1)
         }
 
-        val randomQuality = Random(654321)
         private fun randomQuality(): Int {
             return randomQuality.nextInt(50 + 1)
         }
 
-        val randomItem = Random(654321)
         private fun randomItemName(): String {
             return ITEM_NAMES[randomItem.nextInt(ITEM_NAMES.size)]
         }
+        
+
+
 
 
     }
