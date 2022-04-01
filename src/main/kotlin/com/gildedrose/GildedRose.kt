@@ -24,12 +24,21 @@ class GildedRose(var items: Array<Item>) {
             return
         }
 
+        if(item.name.contains("Conjured") && !item.name.equals("Conjured Mana Cake")) {
+            degradeBy(item, currentSellIn, 2)
+            return
+        }
+
+        degradeBy(item, currentSellIn, 1)
+    }
+
+    private fun degradeBy(item: Item, currentSellIn: Int, quantityToDegrade: Int) {
         if (item.quality > 0) {
-            item.quality = item.quality - 1
+            item.quality = item.quality - quantityToDegrade
         }
         if (currentSellIn <= 0) {
             if (item.quality > 0) {
-                item.quality = item.quality - 1
+                item.quality = item.quality - quantityToDegrade
             }
         }
     }

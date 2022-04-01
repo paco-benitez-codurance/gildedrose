@@ -7,10 +7,10 @@ internal class GildedRoseTest {
 
     @Test
     fun foo() {
-        val items = arrayOf<Item>(Item("XXXXX", 5, 7))
+        val items = arrayOf(Item("Conjured", 5, 7))
         val app = GildedRose(items)
         app.updateQuality()
-        assertEquals(4, app.items[0].sellIn)
+        assertEquals(5, app.items[0].quality)
 
     }
 
