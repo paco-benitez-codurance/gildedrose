@@ -4,12 +4,12 @@ class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
         for (i in items.indices) {
-            updateQualityOfItem(items[i])
+            updateItem(items[i])
         }
     }
 
 
-    private fun updateQualityOfItem(item: Item) {
+    private fun updateItem(item: Item) {
         if (item.name == "Sulfuras, Hand of Ragnaros") {
             return
         }
