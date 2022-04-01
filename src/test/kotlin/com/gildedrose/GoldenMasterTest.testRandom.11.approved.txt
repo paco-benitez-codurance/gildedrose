@@ -1,0 +1,2 @@
+Aged Brie, 0, 42
+Aged Brie, -1, 44
