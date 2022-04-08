@@ -8,7 +8,6 @@ class GildedRose(var items: Array<Item>) {
         }
     }
 
-
     private fun updateItem(item: Item) {
         if (item.name == "Sulfuras, Hand of Ragnaros") {
             return
@@ -16,20 +15,17 @@ class GildedRose(var items: Array<Item>) {
         val currentSellIn = item.sellIn
         updateSellIn(item)
         if (item.name == "Aged Brie") {
-            updateAgedBrie(item, currentSellIn)
+            item.quality = updateAgedBrie(item.quality, currentSellIn)
             return
-        }
-        if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-            updateConcert(item, currentSellIn)
+        } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
+            item.quality = updateConcert(item.quality, currentSellIn)
             return
-        }
-
-        if(item.name.contains("Conjured") && !item.name.equals("Conjured Mana Cake")) {
+        } else if(item.name.contains("Conjured") && !item.name.equals("Conjured Mana Cake")) {
             item.quality = updateConjured(item.quality, currentSellIn)
             return
+        } else {
+            item.quality = updateCommonItem(item.quality, currentSellIn)
         }
-
-        item.quality = updateCommonItem(item.quality, currentSellIn)
     }
 
     private fun updateCommonItem(quality: Int, currentSellIn: Int): Int {
@@ -53,36 +49,40 @@ class GildedRose(var items: Array<Item>) {
         return res
     }
 
-    private fun updateConcert(item: Item, currentSellIn: Int) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1
+    private fun updateConcert(quality: Int, currentSellIn: Int): Int {
+        var res = quality
+        if (res < 50) {
+            res = res + 1
         }
         if (currentSellIn < 11) {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1
+            if (res < 50) {
+                res = res + 1
             }
         }
 
         if (currentSellIn < 6) {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1
+            if (res < 50) {
+                res = res + 1
             }
         }
 
         if (currentSellIn <= 0) {
-            item.quality = item.quality - item.quality
+            res = res - res
         }
+        return res
     }
 
-    private fun updateAgedBrie(item: Item, currentSellIn: Int) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1
+    private fun updateAgedBrie(quality: Int, currentSellIn: Int): Int {
+        var res = quality
+        if (res < 50) {
+            res = res + 1
         }
         if (currentSellIn <= 0) {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1
+            if (res < 50) {
+                res = res + 1
             }
         }
+        return res
     }
 
 
