@@ -6,12 +6,11 @@ import org.junit.jupiter.api.Test
 internal class GildedRoseTest {
 
     @Test
-    fun foo() {
+    fun conjured() {
         val items = arrayOf(Item("Conjured", 5, 7))
         val app = GildedRose(items)
         app.updateQuality()
         assertEquals(5, app.items[0].quality)
-
     }
 
 }
