@@ -25,30 +25,32 @@ class GildedRose(var items: Array<Item>) {
         }
 
         if(item.name.contains("Conjured") && !item.name.equals("Conjured Mana Cake")) {
-            updateConjured(item, currentSellIn)
+            item.quality = updateConjured(item.quality, currentSellIn)
             return
         }
 
-        updateCommonItem(item, currentSellIn)
+        item.quality = updateCommonItem(item.quality, currentSellIn)
     }
 
-    private fun updateCommonItem(item: Item, currentSellIn: Int) {
-        degradeBy(item, currentSellIn, 1)
+    private fun updateCommonItem(quality: Int, currentSellIn: Int): Int {
+        return degradeBy(quality, currentSellIn, 1)
     }
 
-    private fun updateConjured(item: Item, currentSellIn: Int) {
-        degradeBy(item, currentSellIn, 2)
+    private fun updateConjured(quality: Int, currentSellIn: Int): Int {
+        return degradeBy(quality, currentSellIn, 2)
     }
 
-    private fun degradeBy(item: Item, currentSellIn: Int, quantityToDegrade: Int) {
-        if (item.quality > 0) {
-            item.quality = item.quality - quantityToDegrade
+    private fun degradeBy(quality: Int, currentSellIn: Int, quantityToDegrade: Int): Int {
+        var res = quality
+        if (res > 0) {
+            res = res - quantityToDegrade
         }
         if (currentSellIn <= 0) {
-            if (item.quality > 0) {
-                item.quality = item.quality - quantityToDegrade
+            if (res > 0) {
+                res = res - quantityToDegrade
             }
         }
+        return res
     }
 
     private fun updateConcert(item: Item, currentSellIn: Int) {
