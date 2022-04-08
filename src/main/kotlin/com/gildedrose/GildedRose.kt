@@ -4,28 +4,33 @@ class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
         for (i in items.indices) {
-            updateItem(items[i])
+            items[i] = updateItem(items[i])
         }
     }
 
-    private fun updateItem(item: Item) {
-        if (item.name == "Sulfuras, Hand of Ragnaros") {
-            return
-        }
+    private fun updateItem(item: Item): Item {
+
         val currentSellIn = item.sellIn
-        updateSellIn(item)
-        if (item.name == "Aged Brie") {
-            item.quality = updateAgedBrie(item.quality, currentSellIn)
-            return
+        val newSellIn: Int
+        val newQuality: Int
+
+        if (item.name == "Sulfuras, Hand of Ragnaros") {
+            newSellIn = item.sellIn
+            newQuality = item.quality
+        } else if (item.name == "Aged Brie") {
+            newSellIn = updateSellIn(item.sellIn)
+            newQuality = updateAgedBrie(item.quality, currentSellIn)
         } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-            item.quality = updateConcert(item.quality, currentSellIn)
-            return
+            newSellIn = updateSellIn(item.sellIn)
+            newQuality = updateConcert(item.quality, currentSellIn)
         } else if(item.name.contains("Conjured") && !item.name.equals("Conjured Mana Cake")) {
-            item.quality = updateConjured(item.quality, currentSellIn)
-            return
+            newSellIn = updateSellIn(item.sellIn)
+            newQuality = updateConjured(item.quality, currentSellIn)
         } else {
-            item.quality = updateCommonItem(item.quality, currentSellIn)
+            newSellIn = updateSellIn(item.sellIn)
+            newQuality = updateCommonItem(item.quality, currentSellIn)
         }
+        return Item(item.name, newSellIn, newQuality)
     }
 
     private fun updateCommonItem(quality: Int, currentSellIn: Int): Int {
@@ -86,8 +91,8 @@ class GildedRose(var items: Array<Item>) {
     }
 
 
-    private fun updateSellIn(item: Item) {
-        item.sellIn = item.sellIn - 1
+    private fun updateSellIn(sellIn: Int): Int {
+        return sellIn - 1
     }
 
 
