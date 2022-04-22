@@ -33,20 +33,20 @@ class GildedRose(var items: Array<Item>) {
         return Item(item.name, newSellIn, newQuality)
     }
 
-    private fun updateCommonItem(quality: Int, currentSellIn: Int): Int {
-        return degradeBy(quality, currentSellIn, 1)
+    private fun updateCommonItem(quality: Int, sellIn: Int): Int {
+        return degradeBy(quality, sellIn, 1)
     }
 
-    private fun updateConjured(quality: Int, currentSellIn: Int): Int {
-        return degradeBy(quality, currentSellIn, 2)
+    private fun updateConjured(quality: Int, sellIn: Int): Int {
+        return degradeBy(quality, sellIn, 2)
     }
 
-    private fun degradeBy(quality: Int, currentSellIn: Int, quantityToDegrade: Int): Int {
+    private fun degradeBy(quality: Int, sellIn: Int, quantityToDegrade: Int): Int {
         var res = quality
         if (res > 0) {
             res = res - quantityToDegrade
         }
-        if (currentSellIn <= 0) {
+        if (sellIn <= 0) {
             if (res > 0) {
                 res = res - quantityToDegrade
             }
@@ -54,35 +54,35 @@ class GildedRose(var items: Array<Item>) {
         return res
     }
 
-    private fun updateConcert(quality: Int, currentSellIn: Int): Int {
+    private fun updateConcert(quality: Int, sellIn: Int): Int {
         var res = quality
         if (res < 50) {
             res = res + 1
         }
-        if (currentSellIn < 11) {
+        if (sellIn < 11) {
             if (res < 50) {
                 res = res + 1
             }
         }
 
-        if (currentSellIn < 6) {
+        if (sellIn < 6) {
             if (res < 50) {
                 res = res + 1
             }
         }
 
-        if (currentSellIn <= 0) {
+        if (sellIn <= 0) {
             res = res - res
         }
         return res
     }
 
-    private fun updateAgedBrie(quality: Int, currentSellIn: Int): Int {
+    private fun updateAgedBrie(quality: Int, sellIn: Int): Int {
         var res = quality
         if (res < 50) {
             res = res + 1
         }
-        if (currentSellIn <= 0) {
+        if (sellIn <= 0) {
             if (res < 50) {
                 res = res + 1
             }
