@@ -1,5 +1,6 @@
 package com.gildedrose
 
+import com.gildedrose.product.AgedBrie
 import com.gildedrose.product.Product
 import com.gildedrose.product.SulfurasHandOfRgnaros
 
@@ -19,11 +20,12 @@ class GildedRose(var items: Array<Item>) {
 
         if (item.name == "Sulfuras, Hand of Ragnaros") {
             val product: Product = SulfurasHandOfRgnaros(item.sellIn, item.quality)
-            newSellIn = product.sellIn
-            newQuality = product.quality
+            newSellIn = product.updateSellIn()
+            newQuality = product.updateQuality()
         } else if (item.name == "Aged Brie") {
-            newSellIn = updateSellIn(item.sellIn)
-            newQuality = updateAgedBrie(item.quality, currentSellIn)
+            val product: Product = AgedBrie(item.sellIn, item.quality)
+            newSellIn = product.updateSellIn()
+            newQuality = product.updateQuality()
         } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
             newSellIn = updateSellIn(item.sellIn)
             newQuality = updateConcert(item.quality, currentSellIn)
