@@ -1,6 +1,6 @@
 package com.gildedrose.product
 
-abstract class Product(sellIn: Int, quantity: Int) {
+abstract class Product(val sellIn: Int, val quality: Int) {
     abstract fun updateSellIn(): Int
     abstract fun updateQuality(): Int
 }

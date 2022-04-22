@@ -1,5 +1,8 @@
 package com.gildedrose
 
+import com.gildedrose.product.Product
+import com.gildedrose.product.SulfurasHandOfRgnaros
+
 class GildedRose(var items: Array<Item>) {
 
     fun updateQuality() {
@@ -15,8 +18,9 @@ class GildedRose(var items: Array<Item>) {
         val newQuality: Int
 
         if (item.name == "Sulfuras, Hand of Ragnaros") {
-            newSellIn = item.sellIn
-            newQuality = item.quality
+            val product: Product = SulfurasHandOfRgnaros(item.sellIn, item.quality)
+            newSellIn = product.sellIn
+            newQuality = product.quality
         } else if (item.name == "Aged Brie") {
             newSellIn = updateSellIn(item.sellIn)
             newQuality = updateAgedBrie(item.quality, currentSellIn)
