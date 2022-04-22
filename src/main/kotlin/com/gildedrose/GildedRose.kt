@@ -1,8 +1,6 @@
 package com.gildedrose
 
-import com.gildedrose.product.AgedBrie
-import com.gildedrose.product.Product
-import com.gildedrose.product.SulfurasHandOfRgnaros
+import com.gildedrose.product.*
 
 class GildedRose(var items: Array<Item>) {
 
@@ -14,7 +12,6 @@ class GildedRose(var items: Array<Item>) {
 
     private fun updateItem(item: Item): Item {
 
-        val currentSellIn = item.sellIn
         val newSellIn: Int
         val newQuality: Int
 
@@ -27,78 +24,19 @@ class GildedRose(var items: Array<Item>) {
             newSellIn = product.updateSellIn()
             newQuality = product.updateQuality()
         } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-            newSellIn = updateSellIn(item.sellIn)
-            newQuality = updateConcert(item.quality, currentSellIn)
+            val product: Product = Concert(item.sellIn, item.quality)
+            newSellIn = product.updateSellIn()
+            newQuality = product.updateQuality()
         } else if(item.name.contains("Conjured") && !item.name.equals("Conjured Mana Cake")) {
-            newSellIn = updateSellIn(item.sellIn)
-            newQuality = updateConjured(item.quality, currentSellIn)
+            val product: Product = Conjured(item.sellIn, item.quality)
+            newSellIn = product.updateSellIn()
+            newQuality = product.updateQuality()
         } else {
-            newSellIn = updateSellIn(item.sellIn)
-            newQuality = updateCommonItem(item.quality, currentSellIn)
+            val product: Product = Common(item.sellIn, item.quality)
+            newSellIn = product.updateSellIn()
+            newQuality = product.updateQuality()
         }
         return Item(item.name, newSellIn, newQuality)
-    }
-
-    private fun updateCommonItem(quality: Int, sellIn: Int): Int {
-        return degradeBy(quality, sellIn, 1)
-    }
-
-    private fun updateConjured(quality: Int, sellIn: Int): Int {
-        return degradeBy(quality, sellIn, 2)
-    }
-
-    private fun degradeBy(quality: Int, sellIn: Int, quantityToDegrade: Int): Int {
-        var res = quality
-        if (res > 0) {
-            res = res - quantityToDegrade
-        }
-        if (sellIn <= 0) {
-            if (res > 0) {
-                res = res - quantityToDegrade
-            }
-        }
-        return res
-    }
-
-    private fun updateConcert(quality: Int, sellIn: Int): Int {
-        var res = quality
-        if (res < 50) {
-            res = res + 1
-        }
-        if (sellIn < 11) {
-            if (res < 50) {
-                res = res + 1
-            }
-        }
-
-        if (sellIn < 6) {
-            if (res < 50) {
-                res = res + 1
-            }
-        }
-
-        if (sellIn <= 0) {
-            res = res - res
-        }
-        return res
-    }
-
-    private fun updateAgedBrie(quality: Int, sellIn: Int): Int {
-        var res = quality
-        if (res < 50) {
-            res = res + 1
-        }
-        if (sellIn <= 0) {
-            if (res < 50) {
-                res = res + 1
-            }
-        }
-        return res
-    }
-
-
-    private fun updateSellIn(sellIn: Int): Int {
-        return sellIn - 1
     }
 
 
