@@ -11,32 +11,9 @@ class GildedRose(var items: Array<Item>) {
     }
 
     private fun updateItem(item: Item): Item {
+        val product: Product = ProductFactory.product(item)
 
-        val newSellIn: Int
-        val newQuality: Int
-
-        if (item.name == "Sulfuras, Hand of Ragnaros") {
-            val product: Product = SulfurasHandOfRgnaros(item.sellIn, item.quality)
-            newSellIn = product.updateSellIn()
-            newQuality = product.updateQuality()
-        } else if (item.name == "Aged Brie") {
-            val product: Product = AgedBrie(item.sellIn, item.quality)
-            newSellIn = product.updateSellIn()
-            newQuality = product.updateQuality()
-        } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-            val product: Product = Concert(item.sellIn, item.quality)
-            newSellIn = product.updateSellIn()
-            newQuality = product.updateQuality()
-        } else if(item.name.contains("Conjured") && !item.name.equals("Conjured Mana Cake")) {
-            val product: Product = Conjured(item.sellIn, item.quality)
-            newSellIn = product.updateSellIn()
-            newQuality = product.updateQuality()
-        } else {
-            val product: Product = Common(item.sellIn, item.quality)
-            newSellIn = product.updateSellIn()
-            newQuality = product.updateQuality()
-        }
-        return Item(item.name, newSellIn, newQuality)
+        return Item(item.name, product.updateSellIn(), product.updateQuality())
     }
 
 
