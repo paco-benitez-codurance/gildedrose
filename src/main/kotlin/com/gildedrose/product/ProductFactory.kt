@@ -4,16 +4,16 @@ import com.gildedrose.Item
 
 object ProductFactory {
     fun product(item: Item): Product {
-        if (item.name == "Sulfuras, Hand of Ragnaros") {
-            return SulfurasHandOfRgnaros(item.sellIn, item.quality)
+        return if (item.name == "Sulfuras, Hand of Ragnaros") {
+            SulfurasHandOfRgnaros(item.sellIn, item.quality)
         } else if (item.name == "Aged Brie") {
-            return AgedBrie(item.sellIn, item.quality)
+            AgedBrie(item.sellIn, item.quality)
         } else if (item.name == "Backstage passes to a TAFKAL80ETC concert") {
-            return Concert(item.sellIn, item.quality)
-        } else if(item.name.contains("Conjured") && !item.name.equals("Conjured Mana Cake")) {
-            return Conjured(item.sellIn, item.quality)
+            Concert(item.sellIn, item.quality)
+        } else if(item.name.contains("Conjured") && item.name != "Conjured Mana Cake") {
+            Conjured(item.sellIn, item.quality)
         } else {
-            return Common(item.sellIn, item.quality)
+            Common(item.sellIn, item.quality)
         }
     }
 }

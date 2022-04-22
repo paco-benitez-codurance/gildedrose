@@ -7,7 +7,7 @@ abstract class Product(val sellIn: Int, val quality: Int) {
     abstract fun updateQuality(): Int
 
 
-    fun degradeBy(quality: Int, sellIn: Int, quantityToDegrade: Int): Int {
+    fun degradeBy(quantityToDegrade: Int): Int {
         var res = quality
         if (res > 0) {
             res = res - quantityToDegrade
