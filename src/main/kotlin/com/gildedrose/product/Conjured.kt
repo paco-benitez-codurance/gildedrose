@@ -1,7 +1,4 @@
 package com.gildedrose.product
 
-class Conjured(sellIn: Int, quality: Int) : Product(sellIn, quality) {
-    override fun updateQuality(): Int {
-        return degradeBy(2)
-    }
+class Conjured(sellIn: Int, quality: Int) : FixedDegradedProduct(2, sellIn, quality) {
 }
